@@ -9,9 +9,9 @@ import sklearn
 sklearn.set_config(transform_output="pandas")
 import joblib
 
-model = CatBoostClassifier()
-model.load_model('/home/aleksey/DS_bootcamp/ds-phase-1/06-supervised/model.cbm')
-preprocessor = joblib.load('/home/aleksey/DS_bootcamp/ds-phase-1/06-supervised/ml_pipeline.pkl')
+# model = CatBoostClassifier()
+# model.load_model('/home/aleksey/DS_bootcamp/ds-phase-1/06-supervised/model.cbm')
+ml_pipeline = joblib.load('/home/aleksey/DS_bootcamp/ds-phase-1/06-supervised/ml_pipeline.pkl')
 
 st.title('Предсказание сердечных заболеваний на предобученной модели')
 
@@ -36,10 +36,12 @@ input_data = pd.DataFrame([[feature1, feature2, feature3, feature4, feature5,
 
 
 if st.button('Сделать прогноз'):
-        input_data = preprocessor.transform(input_data)
-        prediction = model.predict(input_data)
+    try:
+        prediction = ml_pipeline.predict(input_data)
         if prediction[0] == 0: 
             st.write('Вам пора к врачу')
         else:
             st.write('Поздравляем, вы здоровы!')
+    except Exception as e:
+        st.write("Ошибка при выполнении предсказания:", e)
 

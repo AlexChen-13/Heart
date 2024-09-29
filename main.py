@@ -11,7 +11,7 @@ import joblib
 
 # model = CatBoostClassifier()
 # model.load_model('/home/aleksey/DS_bootcamp/ds-phase-1/06-supervised/model.cbm')
-ml_pipeline = joblib.load('/home/aleksey/DS_bootcamp/ds-phase-1/06-supervised/ml_pipeline.pkl')
+ml_pipeline = joblib.load('ml_pipeline.pkl')
 
 st.title('Предсказание сердечных заболеваний на предобученной модели')
 
